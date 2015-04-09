@@ -27,7 +27,7 @@ impl Axis {
 }
 
 #[derive(Clone)]
-pub enum Tree<T> {
+enum Tree<T> {
     Leaf,
     Node(T, Box<Tree<T>>, Box<Tree<T>>)
 }
@@ -42,7 +42,7 @@ impl<T> Tree<T> {
 }
 
 #[derive(Clone)]
-pub struct Split {
+struct Split {
     axis: Axis,
     ratio: f32
 }
@@ -75,7 +75,7 @@ impl Split {
 }
 
 #[derive(Clone)]
-pub enum Crumb<T> {
+enum Crumb<T> {
     LeftCrumb(T, Tree<T>),
     RightCrumb(T, Tree<T>)
 }
@@ -104,7 +104,7 @@ impl<T: Clone> Crumb<T> {
 }
 
 #[derive(Clone)]
-pub struct Zipper {
+struct Zipper {
     tree: Tree<Split>,
     crumbs: Vec<Crumb<Split>>
 }
@@ -363,25 +363,25 @@ impl BinarySpacePartition {
         BinarySpacePartition { tree: None }
     }
 
-    pub fn make(tree: Tree<Split>) -> BinarySpacePartition {
+    fn make(tree: Tree<Split>) -> BinarySpacePartition {
         BinarySpacePartition { tree: Some(tree) }
     }
 
-    pub fn make_zipper(&self) -> Option<Zipper> {
+    fn make_zipper(&self) -> Option<Zipper> {
         self.tree.clone().map(|x| Zipper::from_tree(x))
     }
 
-    pub fn size(&self) -> usize {
+    fn size(&self) -> usize {
         self.tree.clone().map_or(0, |x| x.number_of_leaves())
     }
 
-    pub fn from_zipper(zipper: Option<Zipper>) -> BinarySpacePartition {
+    fn from_zipper(zipper: Option<Zipper>) -> BinarySpacePartition {
         BinarySpacePartition {
             tree: zipper.clone().map(|x| x.top().to_tree())
         }
     }
 
-    pub fn rectangles(&self, rect: Rectangle) -> Vec<Rectangle> {
+    fn rectangles(&self, rect: Rectangle) -> Vec<Rectangle> {
         self.tree.clone().map_or(Vec::new(), |t| {
             match t {
                 Tree::Leaf => vec!(rect),
