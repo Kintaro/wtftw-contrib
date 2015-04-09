@@ -18,6 +18,15 @@ pub enum Axis {
 }
 
 impl Axis {
+    pub fn from_direction(d: Direction) -> Axis {
+        match d {
+            Direction::Up    => Axis::Horizontal,
+            Direction::Down  => Axis::Horizontal,
+            Direction::Left  => Axis::Vertical,
+            Direction::Right => Axis::Vertical
+        }
+    }
+    
     pub fn opposite(&self) -> Axis {
         match self {
             &Axis::Horizontal => Axis::Vertical,
