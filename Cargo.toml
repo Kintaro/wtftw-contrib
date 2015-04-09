@@ -1,0 +1,22 @@
+[project]
+
+name = "wtftw_contrib"
+version = "0.0.1"
+authors = ["Simon Wollwage"]
+
+[dependencies.wtftw]
+git = "https://github.com/Kintaro/wtftw.git"
+branch = "beta"
+
+[dependencies]
+bitflags = "0.1"
+rustc-serialize = "*"
+log = "*"
+num = "*"
+libc = "*"
+dylib = "*"
+
+[lib]
+name = "wtftw_contrib"
+path = "src/lib.rs"
+crate-type = ["rlib"]
