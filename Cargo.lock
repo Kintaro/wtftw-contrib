@@ -8,7 +8,7 @@ dependencies = [
  "log 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num 0.1.22 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
- "wtftw 0.3.0 (git+https://github.com/Kintaro/wtftw.git?branch=beta)",
+ "wtftw 0.3.0 (git+https://github.com/Kintaro/wtftw.git)",
 ]
 
 [[package]]
@@ -71,7 +71,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "wtftw"
 version = "0.3.0"
-source = "git+https://github.com/Kintaro/wtftw.git?branch=beta#4d66cfcc479d1528f5b210ccc5cf40338b9a0c5d"
+source = "git+https://github.com/Kintaro/wtftw.git#45d76240546aa47b036c724ae2fb434ef89ea5c6"
 dependencies = [
  "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "dylib 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -80,14 +80,14 @@ dependencies = [
  "log 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num 0.1.22 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
- "wtftw_core 0.3.0 (git+https://github.com/Kintaro/wtftw.git?branch=beta)",
- "wtftw_xlib 0.3.0 (git+https://github.com/Kintaro/wtftw.git?branch=beta)",
+ "wtftw_core 0.3.0 (git+https://github.com/Kintaro/wtftw.git)",
+ "wtftw_xlib 0.3.0 (git+https://github.com/Kintaro/wtftw.git)",
 ]
 
 [[package]]
 name = "wtftw_core"
 version = "0.3.0"
-source = "git+https://github.com/Kintaro/wtftw.git?branch=beta#4d66cfcc479d1528f5b210ccc5cf40338b9a0c5d"
+source = "git+https://github.com/Kintaro/wtftw.git#45d76240546aa47b036c724ae2fb434ef89ea5c6"
 dependencies = [
  "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "dylib 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -100,11 +100,11 @@ dependencies = [
 [[package]]
 name = "wtftw_xlib"
 version = "0.3.0"
-source = "git+https://github.com/Kintaro/wtftw.git?branch=beta#4d66cfcc479d1528f5b210ccc5cf40338b9a0c5d"
+source = "git+https://github.com/Kintaro/wtftw.git#45d76240546aa47b036c724ae2fb434ef89ea5c6"
 dependencies = [
  "libc 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "wtftw_core 0.3.0 (git+https://github.com/Kintaro/wtftw.git?branch=beta)",
+ "wtftw_core 0.3.0 (git+https://github.com/Kintaro/wtftw.git)",
  "xinerama 0.0.1 (git+https://github.com/Kintaro/rust-xinerama.git)",
  "xlib 0.1.0 (git+https://github.com/Kintaro/rust-xlib.git?branch=wtftw)",
 ]

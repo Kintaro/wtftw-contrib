@@ -6,7 +6,6 @@ authors = ["Simon Wollwage"]
 
 [dependencies.wtftw]
 git = "https://github.com/Kintaro/wtftw.git"
-branch = "beta"
 
 [dependencies]
 bitflags = "0.1"
