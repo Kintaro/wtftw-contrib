@@ -26,7 +26,7 @@ impl Axis {
             Direction::Right => Axis::Vertical
         }
     }
-    
+
     pub fn opposite(&self) -> Axis {
         match self {
             &Axis::Horizontal => Axis::Vertical,
@@ -135,7 +135,7 @@ impl Zipper {
             &Tree::Leaf => None,
             &Tree::Node(ref x, ref l, ref r) => Some(Zipper {
                 tree: l.deref().clone(),
-                crumbs: Zipper::left_append::<Crumb<Split>>(Crumb::LeftCrumb(x.clone(), r.deref().clone()), 
+                crumbs: Zipper::left_append::<Crumb<Split>>(Crumb::LeftCrumb(x.clone(), r.deref().clone()),
 self.crumbs.clone())
             })
         }
@@ -146,7 +146,7 @@ self.crumbs.clone())
             &Tree::Leaf => None,
             &Tree::Node(ref x, ref l, ref r) => Some(Zipper {
                 tree: r.deref().clone(),
-                crumbs: Zipper::left_append::<Crumb<Split>>(Crumb::RightCrumb(x.clone(), l.deref().clone()), 
+                crumbs: Zipper::left_append::<Crumb<Split>>(Crumb::RightCrumb(x.clone(), l.deref().clone()),
 self.crumbs.clone())
             })
         }
@@ -337,13 +337,13 @@ self.crumbs.clone())
         let head = self.crumbs[0].clone();
 
         match (dir, head) {
-            (Direction::Right, Crumb::LeftCrumb(ref s, _))  if s.axis == Axis::Vertical   => 
+            (Direction::Right, Crumb::LeftCrumb(ref s, _))  if s.axis == Axis::Vertical   =>
 self.go_sibling().and_then(|x| x.expand_towards(Direction::Left)),
-            (Direction::Left,  Crumb::RightCrumb(ref s, _)) if s.axis == Axis::Vertical   => 
+            (Direction::Left,  Crumb::RightCrumb(ref s, _)) if s.axis == Axis::Vertical   =>
 self.go_sibling().and_then(|x| x.expand_towards(Direction::Right)),
-            (Direction::Down,  Crumb::LeftCrumb(ref s, _))  if s.axis == Axis::Horizontal => 
+            (Direction::Down,  Crumb::LeftCrumb(ref s, _))  if s.axis == Axis::Horizontal =>
 self.go_sibling().and_then(|x| x.expand_towards(Direction::Up)),
-            (Direction::Up,    Crumb::RightCrumb(ref s, _)) if s.axis == Axis::Horizontal => 
+            (Direction::Up,    Crumb::RightCrumb(ref s, _)) if s.axis == Axis::Horizontal =>
 self.go_sibling().and_then(|x| x.expand_towards(Direction::Down)),
             _ => self.go_up().and_then(|x| x.shrink_from(dir))
         }
@@ -428,53 +428,32 @@ impl BinarySpacePartition {
         }
     }
 
-    pub fn rotate_nth(&self, n: usize) -> BinarySpacePartition {
+    fn apply_to_leaf<F>(&self, n: usize, f: F) -> BinarySpacePartition where F: Fn(Zipper) -> Option<Zipper> {
         match self.tree {
             None => BinarySpacePartition::empty(),
             Some(ref tree) => {
                 match tree {
                     &Tree::Leaf => self.clone(),
-                    _           => self.do_to_nth(n, |x| x.rotate_current_leaf())
+                    _           => self.do_to_nth(n, |x| f(x))
                 }
             }
         }
+    }
+
+    pub fn rotate_nth(&self, n: usize) -> BinarySpacePartition {
+        self.apply_to_leaf(n, |x| x.rotate_current_leaf())
     }
 
     pub fn swap_nth(&self, n: usize) -> BinarySpacePartition {
-        match self.tree {
-            None => BinarySpacePartition::empty(),
-            Some(ref tree) => {
-                match tree {
-                    &Tree::Leaf => self.clone(),
-                    _           => self.do_to_nth(n, |x| x.swap_current_leaf())
-                }
-            }
-        }
+        self.apply_to_leaf(n, |x| x.swap_current_leaf())
     }
 
     pub fn grow_nth_towards(&self, dir: Direction, n: usize) -> BinarySpacePartition {
-        match self.tree {
-            None => BinarySpacePartition::empty(),
-            Some(ref tree) => {
-                match tree {
-                    &Tree::Leaf => self.clone(),
-                    _           => self.do_to_nth(n, |x| x.expand_towards(dir))
-                }
-            }
-        }
+        self.apply_to_leaf(n, |x| x.expand_towards(dir))
     }
 
     pub fn shrink_nth_from(&self, dir: Direction, n: usize) -> BinarySpacePartition {
-        match self.tree {
-            None => BinarySpacePartition::empty(),
-            Some(ref tree) => {
-                match tree {
-                    &Tree::Leaf => self.clone(),
-                    _           => self.do_to_nth(n, |x| x.shrink_from(dir))
-                }
-            }
-        }
-
+        self.apply_to_leaf(n, |x| x.shrink_from(dir))
     }
 
     fn to_index<T: Clone + Eq>(s: Option<Stack<T>>) -> (Vec<T>, Option<usize>) {
