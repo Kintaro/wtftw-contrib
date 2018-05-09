@@ -1,7 +1,7 @@
-extern crate num;
+extern crate num_traits;
 extern crate wtftw;
 
-use self::num::traits::Bounded;
+use self::num_traits::bounds::Bounded;
 use std::collections::BTreeSet;
 use self::wtftw::config::GeneralConfig;
 use self::wtftw::core::stack::Stack;
