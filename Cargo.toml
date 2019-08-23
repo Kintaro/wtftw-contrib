@@ -13,7 +13,7 @@ rustc-serialize = "0.3.15"
 log = "0.3.1"
 num = "0.1.25"
 libc = "0.1.8"
-dylib = "0.0.1"
+dylib = "0.0.3"
 
 [lib]
 name = "wtftw_contrib"
