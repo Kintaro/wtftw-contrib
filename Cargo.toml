@@ -12,7 +12,7 @@ bitflags = "0.1"
 rustc-serialize = "0.3.15"
 log = "0.3.1"
 num = "0.1.25"
-libc = "0.1.8"
+libc = "0.2.64"
 dylib = "0.0.1"
 
 [lib]
