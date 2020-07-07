@@ -3,17 +3,18 @@
 name = "wtftw_contrib"
 version = "0.0.2"
 authors = ["Simon Wollwage"]
+edition = "2018"
 
 [dependencies.wtftw]
-git = "https://github.com/Kintaro/wtftw.git"
+path = "../wtftw"
 
 [dependencies]
-bitflags = "0.1"
-rustc-serialize = "0.3.15"
-log = "0.3.1"
-num = "0.1.25"
-libc = "0.1.8"
-dylib = "0.0.1"
+bitflags = "1.2.1"
+rustc-serialize = "0.3.24"
+log = "0.4.8"
+num = "0.3.0"
+libc = "0.2.71"
+dylib = "0.0.3"
 
 [lib]
 name = "wtftw_contrib"
